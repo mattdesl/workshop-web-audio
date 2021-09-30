@@ -1,0 +1,26 @@
+{
+  "name": "workshop-web-audio",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "license": "MIT",
+  "author": {
+    "name": "Matt DesLauriers",
+    "email": "dave.des@gmail.com",
+    "url": "https://github.com/mattdesl"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "node test.js"
+  },
+  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mattdesl/workshop-web-audio.git"
+  },
+  "homepage": "https://github.com/mattdesl/workshop-web-audio",
+  "bugs": {
+    "url": "https://github.com/mattdesl/workshop-web-audio/issues"
+  }
+}
