@@ -37,13 +37,13 @@ async function loadSound() {
 
     // Create an Analyser Node
     analyserNode = audioContext.createAnalyser();
-    
+
     // Create a Float32 array to hold the data
     analyserData = new Float32Array(analyserNode.fftSize);
 
     // Connect the GainNode to the analyser
     gainNode.connect(analyserNode);
-    
+
     // Connect GainNode to destination as well
     gainNode.connect(audioContext.destination);
   }
@@ -81,12 +81,14 @@ function draw() {
   // fill background
   background(0, 0, 0);
 
-  fill("white");
-  noStroke();
   if (analyserNode) {
+    noFill();
+    stroke("white");
+
     // Get the new "Time Domain" data from the AnalyserNode
     analyserNode.getFloatTimeDomainData(analyserData);
 
+    beginShape();
     // Loop through each 'bin' and figure out the signal
     for (let i = 0; i < analyserData.length; i++) {
       // The signal (-1..1 range) at this time slice
@@ -94,15 +96,18 @@ function draw() {
 
       // X screen position to draw this rectangle
       const x = (i / analyserData.length) * width;
-      
-      // Scale the amplitude to the screen size
-      const amplitude = (signal * height) / 2;
 
-      // Draw a 1px wide slice for that point in time
-      rectMode(CENTER);
-      rect(x, height / 2, 1, amplitude);
+      // Determine Y position of sample, away from centre
+      const size = height / 2;
+      const y = map(signal, -1, 1, height / 2 - size, height / 2 + size);
+
+      // Place sample
+      vertex(x, y);
     }
+    endShape();
   } else {
+    fill("white");
+    noStroke();
     // Draw a play button
     const dim = min(width, height);
     polygon(width / 2, height / 2, dim * 0.1, 3);
