@@ -68,7 +68,7 @@ More links to web audio, creative coding, and more:
 
 - Resources & Tutorials
 
-  - [awesome-web-audio] — A list that includes resources, books, and more on Web Audio
+  - [awesome-web-audio](https://github.com/notthetup/awesome-webaudio) — A list that includes resources, books, and more on Web Audio
 
   - [The Coding Train](https://thecodingtrain.com) with Daniel Shiffman
 
