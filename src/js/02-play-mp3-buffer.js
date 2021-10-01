@@ -27,10 +27,10 @@ async function loadSound() {
 }
 
 async function playSound() {
-  // Snsure we are all loaded up
+  // Ensure we are all loaded up
   await loadSound();
 
-  // Snsure we are in a resumed state
+  // Ensure we are in a resumed state
   await audioContext.resume();
 
   // Now create a new "Buffer Source" node for playing AudioBuffers

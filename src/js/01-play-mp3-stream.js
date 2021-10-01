@@ -3,31 +3,27 @@ let audio;
 
 function mousePressed() {
   if (!audioContext) {
-    // Create a new audio context
+    // setup our audio
     audioContext = new AudioContext();
 
-    // Create <audio> tag
+    // create new <audio> tag
     audio = document.createElement("audio");
 
-    // set URL to the MP3 within your Glitch.com assets
-    audio.src = "audio/piano.mp3";
-
-    // To play audio through Glitch.com CDN
-    audio.crossOrigin = "Anonymous";
-
-    // Enable looping so the audio never stops
+    // optional; enable audio looping
     audio.loop = true;
 
-    // Play audio
+    // set the URL of the audio asset
+    audio.src = "audio/piano.mp3";
+
+    // trigger audio
     audio.play();
 
-    // Create a "Media Element" source node
     const source = audioContext.createMediaElementSource(audio);
 
-    // Connect the source to the destination (speakers/headphones)
+    // wire the source to the 'speaker'
     source.connect(audioContext.destination);
   } else {
-    // Clean up our element and audio context
+    // stop the audio
     audio.pause();
     audioContext.close();
     audioContext = audio = null;

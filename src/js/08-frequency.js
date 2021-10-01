@@ -12,7 +12,7 @@ function mousePressed() {
     audio = document.createElement("audio");
 
     // set URL to the MP3 within your Glitch.com assets
-    audio.src = "audio/bluejeans.mp3";
+    audio.src = "audio/piano.mp3";
 
     // To play audio through Glitch.com CDN
     audio.crossOrigin = "Anonymous";
@@ -111,12 +111,12 @@ function draw() {
 
     // draw the low frequency signal
     stroke("#E84420");
-    const drum = audioSignal(analyserNode, frequencyData, 10, 100);
+    const drum = audioSignal(analyserNode, frequencyData, 150, 2500);
     circle(cx, cy, radius * drum);
 
     // draw the higher frequency signal
     stroke("#F4CD00");
-    const voice = audioSignal(analyserNode, frequencyData, 5000, 7000);
+    const voice = audioSignal(analyserNode, frequencyData, 50, 150);
     circle(cx, cy, radius * voice);
   } else {
     polygon(width / 2, height / 2, dim * 0.1, 3);

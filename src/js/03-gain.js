@@ -25,13 +25,13 @@ function mousePressed() {
     // Create a "Media Element" source node
     const source = audioContext.createMediaElementSource(audio);
 
-    // Create a master gain node that will handle volume control
+    // Create a gain for volume adjustment
     gainNode = audioContext.createGain();
 
-    // Connect the source to the master gain
+    // wire source to gain
     source.connect(gainNode);
 
-    // Connect the gain to the destination (speakers/headphones)
+    // wire the gain -> speaker
     gainNode.connect(audioContext.destination);
   } else {
     // Clean up our element and audio context

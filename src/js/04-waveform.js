@@ -83,25 +83,28 @@ function draw() {
     noFill();
     stroke("white");
 
-    // Get the new "Time Domain" data from the AnalyserNode
+    // get time domain data
     analyserNode.getFloatTimeDomainData(analyserData);
 
     beginShape();
-    // Loop through each 'bin' and figure out the signal
+
     for (let i = 0; i < analyserData.length; i++) {
-      // The signal (-1..1 range) at this time slice
-      const signal = analyserData[i];
+      // -1...1
+      const amplitude = analyserData[i];
 
-      // X screen position to draw this rectangle
-      const x = (i / analyserData.length) * width;
+      const y = map(
+        amplitude,
+        -1,
+        1,
+        height / 2 - height / 4,
+        height / 2 + height / 4
+      );
 
-      // Determine Y position of sample, away from centre
-      const size = height / 2;
-      const y = map(signal, -1, 1, height / 2 - size, height / 2 + size);
+      const x = map(i, 0, analyserData.length - 1, 0, width);
 
-      // Place sample
       vertex(x, y);
     }
+
     endShape();
   } else {
     fill("white");
