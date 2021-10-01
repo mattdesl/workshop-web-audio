@@ -5,9 +5,9 @@ const volume = -15;
 let synth;
 
 // Create a new canvas to the browser size
-function setup () {
+function setup() {
   createCanvas(windowWidth, windowHeight);
-  
+
   // Clear with black on setup
   background(0);
 
@@ -16,9 +16,9 @@ function setup () {
 
   // Setup a synth with ToneJS
   synth = new Tone.Synth({
-    "oscillator" : {
-      "type": 'sine'
-    }
+    oscillator: {
+      type: "sine",
+    },
   });
 
   // Wire up our nodes:
@@ -27,7 +27,7 @@ function setup () {
 }
 
 // On window resize, update the canvas size
-function windowResized () {
+function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 }
 
@@ -37,17 +37,17 @@ function draw() {
 
   // Black background
   background(0);
-  
+
   // Get a 0..1 value for the mouse
   const u = max(0, min(1, mouseX / width));
 
   // Choose a frequency that sounds good
   const frequency = lerp(75, 2500, u);
   synth.setNote(frequency);
-  
+
   if (mouseIsPressed) {
     const time = millis() / 1000;
-    
+
     const verts = 1000;
     noFill();
     stroke(255);
@@ -57,20 +57,19 @@ function draw() {
       const t = verts <= 1 ? 0.5 : i / (verts - 1);
       const x = t * width;
       let y = height / 2;
-      
+
       // This is not an accurate representation, but
       // instead exaggerated for the sake of visualization
       const frequencyMod = lerp(1, 1000, pow(u, 5));
       const amplitude = sin(time + t * frequencyMod);
-      
-      y += amplitude * height / 2;
+
+      y += (amplitude * height) / 2;
 
       vertex(x, y);
     }
     endShape();
   }
-  
-  
+
   // Draw a 'play' button
   noStroke();
   fill(255);
@@ -78,12 +77,12 @@ function draw() {
 }
 
 // Update the FX and trigger synth ON
-function mousePressed () {
+function mousePressed() {
   synth.triggerAttack();
 }
 
 // Trigger synth OFF
-function mouseReleased () {
+function mouseReleased() {
   synth.triggerRelease();
 }
 

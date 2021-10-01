@@ -17,7 +17,7 @@ let filter, effect;
 
 // Min and max frequency (Hz) cutoff range for the filter
 const filterMin = 100;
-const filterMax = 8000;
+const filterMax = 5000;
 
 // 0..1 values for our FX
 let fxU = 0.5;
@@ -71,11 +71,11 @@ async function setup() {
   });
 
   // Now lets wire up our stack like so:
-  // synth->filter->effect->reverb->master
-  synth.connect(filter);
-  filter.connect(effect);
+  // synth->effect->reverb->filter->master
+  synth.connect(effect);
   effect.connect(reverb);
-  reverb.connect(Tone.Master);
+  reverb.connect(filter);
+  filter.connect(Tone.Master);
 
   // Now we're ready for drawing!
   ready = true;
