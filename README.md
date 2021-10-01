@@ -64,11 +64,19 @@ I've also included a small "recipes" document that you can use as a reference if
 
 # Setup
 
+If you want to run locally (without internet), clone this repo into a new folder, then use Node.js to cd into the folder and run the following to install dependencies:
+
 ```sh
 npm install
+```
 
+Now, start the development server:
+
+```sh
 npm start
 ```
+
+Edit files in `src/js` and see them reflected in the browser.
 
 # Further Reading
 
