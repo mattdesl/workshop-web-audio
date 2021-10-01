@@ -19,9 +19,7 @@ async function loadSound() {
   // Re-use the audio buffer as a source
   if (!audioBuffer) {
     // Fetch MP3 from URL
-    const resp = await fetch(
-      "https://cdn.glitch.com/efd607a8-13b8-4089-841b-f5c1a80c47e3%2Fchime.mp3?v=1632745141657"
-    );
+    const resp = await fetch("audio/chime.mp3");
 
     // Turn into an array buffer of raw binary data
     const buf = await resp.arrayBuffer();

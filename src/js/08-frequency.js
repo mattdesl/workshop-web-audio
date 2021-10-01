@@ -12,8 +12,7 @@ function mousePressed() {
     audio = document.createElement("audio");
 
     // set URL to the MP3 within your Glitch.com assets
-    audio.src =
-      "https://cdn.glitch.com/0e3e4851-acfe-4cc5-b1d7-7d6370d7ce81%2Fbluejeans.mp3?v=1632756630249";
+    audio.src = "audio/bluejeans.mp3";
 
     // To play audio through Glitch.com CDN
     audio.crossOrigin = "Anonymous";

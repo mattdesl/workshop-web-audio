@@ -1,6 +1,5 @@
 let audioContext;
 let audio;
-let gainNode;
 
 function mousePressed() {
   if (!audioContext) {
@@ -11,8 +10,7 @@ function mousePressed() {
     audio = document.createElement("audio");
 
     // set URL to the MP3 within your Glitch.com assets
-    audio.src =
-      "https://cdn.glitch.com/efd607a8-13b8-4089-841b-f5c1a80c47e3%2Fpiano.mp3?v=1632745147697";
+    audio.src = "audio/piano.mp3";
 
     // To play audio through Glitch.com CDN
     audio.crossOrigin = "Anonymous";
@@ -26,14 +24,8 @@ function mousePressed() {
     // Create a "Media Element" source node
     const source = audioContext.createMediaElementSource(audio);
 
-    // Create a master gain node that will handle volume control
-    gainNode = audioContext.createGain();
-
-    // Connect the source to the master gain
-    source.connect(gainNode);
-
-    // Connect the gain to the destination (speakers/headphones)
-    gainNode.connect(audioContext.destination);
+    // Connect the source to the destination (speakers/headphones)
+    source.connect(audioContext.destination);
   } else {
     // Clean up our element and audio context
     audio.pause();
@@ -60,15 +52,7 @@ function draw() {
   // Draw play/pause button
   const dim = min(width, height);
   if (audioContext) {
-    // Get a new volume based on mouse position
-    const volume = abs(mouseX - width / 2) / (width / 2);
-
-    // Schedule a gradual shift in value with a small time constant
-    gainNode.gain.setTargetAtTime(volume, audioContext.currentTime, 0.01);
-
-    // Draw a volume meter
-    rectMode(CENTER);
-    rect(width / 2, height / 2, dim * volume, dim * 0.05);
+    polygon(width / 2, height / 2, dim * 0.1, 4, PI / 4);
   } else {
     polygon(width / 2, height / 2, dim * 0.1, 3);
   }

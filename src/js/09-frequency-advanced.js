@@ -42,8 +42,7 @@ function mousePressed() {
 
     // Set source
     audio.crossOrigin = "Anonymous";
-    audio.src =
-      "https://cdn.glitch.com/efd607a8-13b8-4089-841b-f5c1a80c47e3%2Fpiano.mp3?v=1632745147697";
+    audio.src = "audio/piano.mp3";
 
     // Connect source into the WebAudio context
     const source = audioContext.createMediaElementSource(audio);

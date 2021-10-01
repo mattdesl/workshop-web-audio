@@ -1,7 +1,6 @@
 let audioContext;
 let audio;
-let signalData;
-let analyserNode;
+let gainNode;
 
 function mousePressed() {
   if (!audioContext) {
@@ -12,8 +11,7 @@ function mousePressed() {
     audio = document.createElement("audio");
 
     // set URL to the MP3 within your Glitch.com assets
-    audio.src =
-      "https://cdn.glitch.com/efd607a8-13b8-4089-841b-f5c1a80c47e3%2Fpiano.mp3?v=1632745147697";
+    audio.src = "audio/piano.mp3";
 
     // To play audio through Glitch.com CDN
     audio.crossOrigin = "Anonymous";
@@ -27,32 +25,20 @@ function mousePressed() {
     // Create a "Media Element" source node
     const source = audioContext.createMediaElementSource(audio);
 
-    // Create an analyser
-    analyserNode = audioContext.createAnalyser();
-    analyserNode.smoothingTimeConstant = 1;
+    // Create a master gain node that will handle volume control
+    gainNode = audioContext.createGain();
 
-    // Create FFT data
-    signalData = new Float32Array(analyserNode.fftSize);
+    // Connect the source to the master gain
+    source.connect(gainNode);
 
-    // Connect the source to the destination (speakers/headphones)
-    source.connect(audioContext.destination);
-
-    // Connect the source to the analyser node as well
-    source.connect(analyserNode);
+    // Connect the gain to the destination (speakers/headphones)
+    gainNode.connect(audioContext.destination);
   } else {
     // Clean up our element and audio context
-    if (audio.paused) audio.play();
-    else audio.pause();
+    audio.pause();
+    audioContext.close();
+    audioContext = audio = null;
   }
-}
-
-// Get the root mean squared of a set of signals
-function rootMeanSquaredSignal(data) {
-  let rms = 0;
-  for (let i = 0; i < data.length; i++) {
-    rms += data[i] * data[i];
-  }
-  return Math.sqrt(rms / data.length);
 }
 
 function setup() {
@@ -67,24 +53,22 @@ function draw() {
   // fill background
   background("black");
 
+  fill("white");
+  noStroke();
+
   // Draw play/pause button
   const dim = min(width, height);
   if (audioContext) {
-    // Get the *time domain* data (not the frequency)
-    analyserNode.getFloatTimeDomainData(signalData);
+    // Get a new volume based on mouse position
+    const volume = abs(mouseX - width / 2) / (width / 2);
 
-    // Get the root mean square of the data
-    const signal = rootMeanSquaredSignal(signalData);
-    const scale = 10; // scale the data a bit so the circle is bigger
-    const size = dim * scale * signal;
+    // Schedule a gradual shift in value with a small time constant
+    gainNode.gain.setTargetAtTime(volume, audioContext.currentTime, 0.01);
 
-    stroke("white");
-    noFill();
-    strokeWeight(dim * 0.0075);
-    circle(width / 2, height / 2, size);
+    // Draw a volume meter
+    rectMode(CENTER);
+    rect(width / 2, height / 2, dim * volume, dim * 0.05);
   } else {
-    fill("white");
-    noStroke();
     polygon(width / 2, height / 2, dim * 0.1, 3);
   }
 }
