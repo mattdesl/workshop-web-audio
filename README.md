@@ -12,7 +12,7 @@ This repository includes resources & course notes for those attending my _Web Au
 
 - ✂️️ [Code Snippets](#code-snippets)
 
-- 📖 [Slides](#slides)
+- 📖 [Setup](#setup)
 
 - ✨ [Further Reading](#further-reading)
 
@@ -61,6 +61,14 @@ And here's a useful cheat sheet to use as a reference:
 I've also included a small "recipes" document that you can use as a reference if you are forgetting some of the patterns and recipes discussed during the workshop.
 
 - [Code Snippets](./docs/snippets.md)
+
+# Setup
+
+```sh
+npm install
+
+npm start
+```
 
 # Further Reading
 

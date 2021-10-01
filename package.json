@@ -13,7 +13,7 @@
     "live-server": "^1.2.1"
   },
   "scripts": {
-    "test": "live-server src"
+    "start": "live-server src"
   },
   "keywords": [],
   "repository": {
