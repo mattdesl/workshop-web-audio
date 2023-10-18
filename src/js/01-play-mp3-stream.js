@@ -25,8 +25,8 @@ function mousePressed() {
   } else {
     // stop the audio
     audio.pause();
-    audioContext.close();
-    audioContext = audio = null;
+    audioContext.pause();
+    // audioContext = audio = null;
   }
 }
 

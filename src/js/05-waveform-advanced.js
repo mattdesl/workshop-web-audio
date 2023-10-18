@@ -54,6 +54,7 @@ function mousePressed() {
     analyserNode.fftSize = 2048 * detail;
 
     isFloat = Boolean(analyserNode.getFloatTimeDomainData);
+    // Use anlayserNode to turn it into a Float array ex: [0.52, -0.4, 0.1, 0.6, -0.1] it's based on each data point in graph
     analyserData = new Float32Array(analyserNode.fftSize);
     if (isFloat) {
       // We can use float array for this, for higher detail

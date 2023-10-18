@@ -38,8 +38,8 @@ async function setup() {
 
   // Setup a reverb with ToneJS
   const reverb = new Tone.Reverb({
-    decay: 5,
-    wet: 0.5,
+    decay: 2,
+    wet: 0.9,
     preDelay: 0.2,
   });
 

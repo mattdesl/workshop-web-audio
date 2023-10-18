@@ -63,7 +63,8 @@ function draw() {
     const volume = abs(mouseX - width / 2) / (width / 2);
 
     // Schedule a gradual shift in value with a small time constant
-    gainNode.gain.setTargetAtTime(volume, audioContext.currentTime, 0.01);
+    gainNode.gain.volume = volume;
+    // gainNode.gain.setTargetAtTime(volume, audioContext.currentTime, 0.01);
 
     // Draw a volume meter
     rectMode(CENTER);
